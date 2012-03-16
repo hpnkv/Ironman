@@ -1,0 +1,23 @@
+name: Ironman
+authors: [apankov, qwerchik]
+main: apankov.ironman.Ironman
+version: 1.0
+depend: [Vault]
+commands:
+    ironman:
+        aliases: im
+        description:
+        usage: |
+            /<command> - Makes you the Ironman!
+    unironman:
+        aliases: uim
+        description:
+        usage: |
+            /<command> - Makes you normal again.
+    imkit:
+        description:
+        usage: |
+            /<command> - Puts full iron armor on you.
+    rxyaywn:
+        description:
+        usage:
