@@ -122,7 +122,7 @@ public class IMExecutor implements CommandExecutor {
             player = (Player) sender;
         }
         if(cmd.getName().equalsIgnoreCase("ironman")) {
-            if(plugin.permissions.has(sender, "ironman.cast")) {
+            if(plugin.permissions.has(sender, "ironman.full")) {
                 Player target = null;
                 if(args.length > 1) {
                     sender.sendMessage(ChatColor.RED + "Too many arguments.");
@@ -172,8 +172,10 @@ public class IMExecutor implements CommandExecutor {
                 if(player_im != null) {
                     if(player_im.isCheater()) {
                         player_im.setCheaterState(false);
+                        player.sendMessage(ChatColor.YELLOW + "You are not cheater anymore!");
                     } else {
                         player_im.setCheaterState(true);
+                        player.sendMessage(ChatColor.YELLOW + "You are now cheater, huh!");
                     }
                 }
             }
@@ -187,9 +189,27 @@ public class IMExecutor implements CommandExecutor {
                             Location loc = target.getLocation();
                             target.setHealth(0);
                             scheduleExplosion(target, 0, 16);
+                            player.sendMessage(ChatColor.DARK_AQUA + "Huuuuuuuuuuuuuuh!");
                         }
                     }
                 }
+            }
+            return true;
+        } else if(cmd.getName().equalsIgnoreCase("imarmor")) {
+            if(plugin.permissions.has(sender, "ironman.armor")) {
+                Player target = null;
+                if(args.length > 1) {
+                    sender.sendMessage(ChatColor.RED + "Too many arguments.");
+                    //Displays usage message
+                    return false;
+                } else if(args.length == 1) {
+                    target = getPlugin().getServer().getPlayer(args[0]);
+                    if(target == null) {
+                        sender.sendMessage(ChatColor.RED + "Player is not online.");
+                    } else {
+                        ironmanPlayer(sender, target, false);
+                    }
+                } else ironmanPlayer(sender, player, false);
             }
             return true;
         }
